@@ -1,0 +1,98 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long int
+#define ipair pair<int,int>
+#define pb push_back
+#define PQ priority_queue
+#define vc vector<int>
+#define ld long double
+#define ub upper_bound
+#define oo 1000000000000000000
+const int N=1e5+1;
+ll M = 1e9+7;
+ll MX = 1e6+2;
+
+// bool isPalindrome(string s , int i, int j){
+//    if(i==j){
+//       return true;
+//    }
+//    if(i>j){
+//       return true; 
+//    }
+//    if(s[i] == s[j]){
+//       return isPalindrome(s, i+1,j-1);
+//    }
+//    return false;
+// }
+
+// bool isprime(ll n){
+   
+//    for(ll i=2;i<=sqrt(n);i++){
+//       if(n%i==0) return false;
+//    }
+
+//    return true;
+   
+// }
+
+ 
+void no(){
+   ll n,m;
+   cin>>n>>m;
+   ll a;
+   vector<vector<ll>> x(N);
+   vector<vector<ll>> y(N);
+  
+
+   ll mx = INT_MIN;
+   
+   for(int i=0;i<n;i++){
+      for(int j=0;j<m;j++){
+         cin>>a;
+         mx = max(mx, a);
+         x[a].push_back(i);
+         y[a].push_back(j);
+      }
+   }
+   for(int i=1;i<=mx;i++){
+      sort(x[i].begin(),x[i].end());
+      sort(y[i].begin(),y[i].end());
+   }
+   
+   
+   vector<vector<ll>> sx(N);
+   vector<vector<ll>> sy(N);
+   for(int i=1;i<=mx;i++){
+      ll tempx = 0;
+      ll tempy = 0;
+      for(int j=0;j<x[i].size();j++){
+         tempx+=x[i][j];
+         tempy+=y[i][j];
+         sx[i].push_back(tempx);
+         sy[i].push_back(tempy);
+      }
+   }
+   ll ans=0;
+   for(int i=1;i<=mx;i++){
+      ll sz = x[i].size()-1;
+      for(int j=0;j<x[i].size();j++){
+         ans += sx[i][x[i].size()-1] - sx[i][j] - sz * x[i][j];
+         ans += sy[i][y[i].size()-1] - sy[i][j] - sz * y[i][j];
+         sz--;
+   
+      }
+   }
+
+   cout<<ans<<"\n";
+
+   // for(int i=1;i<=mx;i++){
+   //    cout<<sx[i].size()<<" "<<sy[i].size()<<"\n";
+   // }
+}
+
+int main(){
+	int t=1;
+	while(t--){
+		no();
+	}
+}
